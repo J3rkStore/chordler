@@ -2,21 +2,26 @@ import "./css/app.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Links from "./pages/Links";
 
 function App() {
   return (
     //jsx fragment shown with the <></> element that wraps both divs.  All JSX components need a parent element (in common?)
     <div className="components">
-      <header className="app-header">
-        <Header />
-      </header>
-      <div className="app-navigation">
+      <Header />
+      <Router>
         <Navigation />
-      </div>
+        <div className="pages">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/links" element={<Links />} />
+          </Routes>
+        </div>
+      </Router>
 
-      <div className="app-footer">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
