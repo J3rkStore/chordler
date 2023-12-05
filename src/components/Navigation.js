@@ -19,6 +19,11 @@ const Navigation = () => {
             Links
           </p>
         </li>
+        <li>
+          <p className="nav-item" onClick={() => navigate("/scales")}>
+            Scales and Chords
+          </p>
+        </li>
       </ul>
     </div>
   );

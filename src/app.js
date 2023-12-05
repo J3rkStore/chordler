@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Links from "./pages/Links";
+import Scales from "./pages/Scales";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/links" element={<Links />} />
+            <Route path="/scales" element={<Scales />} />
           </Routes>
         </div>
       </Router>
