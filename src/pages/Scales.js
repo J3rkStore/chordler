@@ -27,7 +27,7 @@ const Scales = () => {
     "aeolian",
     "locrian",
   ];
-  const ionianPattern = ["W", "W", "H", "W", "W", "W", "H"];
+
   const majorPattern = "WWHWWWH";
   const [tonic, setTonic] = useState("");
   const [scale, setScale] = useState("");
@@ -133,8 +133,8 @@ const Scales = () => {
           Scale is {tonic} {scale}
         </h2>
         <button onClick={getScalePattern}>get scale pattern</button>
-        <button onClick={getNotesInKey}>see notes in key</button>
         <h3>scale pattern is {scalePattern}</h3>
+        <button onClick={getNotesInKey}>see notes in key</button>
         <h3>notes in key {notesInKey}</h3>
       </section>
     </div>
