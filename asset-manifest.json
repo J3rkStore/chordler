@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/J3rkStore/chordler/static/css/main.ccb7300f.css",
-    "main.js": "/J3rkStore/chordler/static/js/main.fa7f9ff8.js",
-    "index.html": "/J3rkStore/chordler/index.html",
-    "main.ccb7300f.css.map": "/J3rkStore/chordler/static/css/main.ccb7300f.css.map",
-    "main.fa7f9ff8.js.map": "/J3rkStore/chordler/static/js/main.fa7f9ff8.js.map"
+    "main.css": "/chordler/static/css/main.ccb7300f.css",
+    "main.js": "/chordler/static/js/main.fa7f9ff8.js",
+    "index.html": "/chordler/index.html",
+    "main.ccb7300f.css.map": "/chordler/static/css/main.ccb7300f.css.map",
+    "main.fa7f9ff8.js.map": "/chordler/static/js/main.fa7f9ff8.js.map"
   },
   "entrypoints": [
     "static/css/main.ccb7300f.css",
