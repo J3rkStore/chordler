@@ -33,6 +33,7 @@ const Scales = () => {
   const [scale, setScale] = useState("");
   const [scalePattern, setScalePattern] = useState("");
   const [notesInKey, setNotesInKey] = useState("");
+  const [notesInKeyArray, setNotesInKeyArray] = useState([]);
 
   function getScalePattern() {
     var startingMode = 0;
@@ -54,6 +55,39 @@ const Scales = () => {
       }
     }
     setScalePattern(pattern);
+  }
+
+  function getNotesInKeyArray() {
+    let keynotes = [];
+    var startingNote = 0;
+    // keynotes.append(tonic);
+    keynotes.push(tonic);
+    for (let i = 0; i < allNotes.length; i++) {
+      if (allNotes[i] === tonic) {
+        console.log("first note is " + tonic);
+        // keynotes.append(allNotes[i]);
+        // keynotes += allNotes[i];
+        startingNote += i;
+      }
+    }
+    var notePos = startingNote;
+    for (let i = 0; i < scalePattern.length - 1; i++) {
+      if (scalePattern[i] === "W") {
+        notePos += 2;
+      } else {
+        notePos += 1;
+      }
+      //   keynotes.append(allNotes[notePos]);
+      if (notePos < 12) {
+        keynotes.push(allNotes[notePos]);
+      } else {
+        notePos = notePos - 12;
+        keynotes.push(allNotes[notePos]);
+      }
+    }
+    console.log(keynotes);
+    setNotesInKeyArray(keynotes);
+    return keynotes;
   }
 
   function getNotesInKey() {
@@ -86,6 +120,7 @@ const Scales = () => {
         keynotes += allNotes[notePos];
         keynotes += " ";
       }
+      console.log(keynotes);
     }
     console.log(keynotes);
     setNotesInKey(keynotes);
@@ -136,6 +171,15 @@ const Scales = () => {
         <h3>scale pattern is {scalePattern}</h3>
         <button onClick={getNotesInKey}>see notes in key</button>
         <h3>notes in key {notesInKey}</h3>
+        <button onClick={getNotesInKeyArray}>see notes in key array</button>
+        <h3>notes in key array {notesInKeyArray}</h3>
+        {notesInKeyArray.map((note, i) => {
+          return (
+            <card className="note-card">
+              <p>{note}</p>
+            </card>
+          );
+        })}
       </section>
     </div>
   );
