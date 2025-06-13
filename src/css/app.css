@@ -1,5 +1,8 @@
+
+
 body {
-    background-color: bisque;
+    background-image: linear-gradient(to bottom right, #763e9b, #670ba4, #763e9b, #670ba4, #763e9b);
+    background-size: 500%;
 }
 
 h1, h2, h3 {
