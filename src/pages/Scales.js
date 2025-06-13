@@ -32,8 +32,64 @@ const Scales = () => {
   const [tonic, setTonic] = useState("");
   const [scale, setScale] = useState("");
   const [scalePattern, setScalePattern] = useState("");
+  // TO DO:  refactor notes in key, to be an array of objects. example:
+  //   {id: 1,
+  //       note: "A",
+  //       interval: "I",
+  //   mode: "ionian",
+  //   triad: 'major',
+  //   seventh: "major",
+  //   ninth: "major",
+  //   eleventh: "perfect",
+  //   thirteenth: "major",
+  //   function: "tonic",
+  //   }
+
   const [notesInKey, setNotesInKey] = useState("");
   const [notesInKeyArray, setNotesInKeyArray] = useState([]);
+  const [chordsInKey, setChordsInKey] = useState([]);
+
+  function testChords() {
+    setChordsInKey([
+      {
+        id: 1,
+        note: "A",
+        interval: "I",
+        mode: "ionian",
+        triad: "major",
+        seventh: "major",
+        ninth: "major",
+        eleventh: "perfect",
+        thirteenth: "major",
+        function: "tonic",
+      },
+    ]);
+  }
+
+  function getChords() {
+    var startingMode = 0;
+    for (let i = 0; i < 7; i++) {
+      if (diatonicScales[i] === scale) {
+        startingMode += i;
+      }
+    }
+    for (let i = 0; i < 7; i++) {
+      //adding doubled up arrays with key tones and diatonic scales list to make it easy for iterating past 7
+      const doubleScaleTones = notesInKeyArray.push(notesInKeyArray);
+      const doubleDiatonicScales = diatonicScales.push(diatonicScales);
+      const chordInfo = {
+        id: 1 + i,
+        note: notesInKeyArray[i],
+        mode: doubleDiatonicScales[startingMode + i],
+        chordTones: [
+          doubleScaleTones[i],
+          doubleScaleTones[i + 2],
+          doubleScaleTones[i + 4],
+          doubleScaleTones[i + 6],
+        ],
+      };
+    }
+  }
 
   function getScalePattern() {
     var startingMode = 0;
@@ -90,43 +146,6 @@ const Scales = () => {
     return keynotes;
   }
 
-  function getNotesInKey() {
-    let keynotes = [];
-    var startingNote = 0;
-    // keynotes.append(tonic);
-    keynotes += tonic;
-    keynotes += " ";
-    for (let i = 0; i < allNotes.length; i++) {
-      if (allNotes[i] === tonic) {
-        console.log("first note is " + tonic);
-        // keynotes.append(allNotes[i]);
-        // keynotes += allNotes[i];
-        startingNote += i;
-      }
-    }
-    var notePos = startingNote;
-    for (let i = 0; i < scalePattern.length - 1; i++) {
-      if (scalePattern[i] === "W") {
-        notePos += 2;
-      } else {
-        notePos += 1;
-      }
-      //   keynotes.append(allNotes[notePos]);
-      if (notePos < 12) {
-        keynotes += allNotes[notePos];
-        keynotes += " ";
-      } else {
-        notePos = notePos - 12;
-        keynotes += allNotes[notePos];
-        keynotes += " ";
-      }
-      console.log(keynotes);
-    }
-    console.log(keynotes);
-    setNotesInKey(keynotes);
-    return keynotes;
-  }
-
   return (
     <div className="scalespage">
       <section className="greeting">
@@ -169,17 +188,17 @@ const Scales = () => {
         </h2>
         <button onClick={getScalePattern}>get scale pattern</button>
         <h3>scale pattern is {scalePattern}</h3>
-        <button onClick={getNotesInKey}>see notes in key</button>
-        <h3>notes in key {notesInKey}</h3>
         <button onClick={getNotesInKeyArray}>see notes in key array</button>
         <h3>notes in key array {notesInKeyArray}</h3>
-        {notesInKeyArray.map((note, i) => {
-          return (
-            <card className="note-card">
-              <p>{note}</p>
-            </card>
-          );
-        })}
+        <div className="notes-in-key">
+          {notesInKeyArray.map((note, i) => {
+            return (
+              <div className="note-card">
+                <p>{note}</p>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );
